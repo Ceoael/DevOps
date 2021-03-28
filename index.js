@@ -1,7 +1,6 @@
 require('dotenv').config()
 
 const express = require("express");
-// const bodyParser = require('body-parser');
 const cors = require("cors");
 const redis = require("redis");
 const { Pool } = require('pg');
@@ -11,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
+
 
 const redisClient = redis.createClient({
     host: "myredis",
@@ -101,9 +100,9 @@ app.post('/telescopes', (req, res) => {
         if (err) {
             throw err;
         }
-        const rows = JSON.stringify(result.rows);
-        console.log('[rows]' + rows);
-        redisClient.setex(result.rows[0].id, 600, JSON.stringify(req.body));
+        const id = result.rows[0].id;
+
+        redisClient.setex(id, 600, JSON.stringify([{id: id, ...req.body}]));
         res.status(201).json({
             message: 'Successfully added record to database.',
             telescope: {id: result.rows[0].id, producer: producer, model: model, price: price}
