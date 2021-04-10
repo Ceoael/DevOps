@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon --legacy-watch",
     "start": "node index.js"
   },
   "keywords": [],

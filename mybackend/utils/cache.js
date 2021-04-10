@@ -1,7 +1,7 @@
 const redis = require("redis");
 
 const redisClient = redis.createClient({
-    host: "myredis",
+    host: process.env.REDIS_HOST,
     port: 6379,
     // retry_strategy: () => 1000
 });
