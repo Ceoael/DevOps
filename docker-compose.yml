@@ -1,0 +1,29 @@
+version: '3'
+
+services: 
+  myredis:
+    image: 'redis:alpine'
+  mypostgres:
+    image: 'postgres:alpine'
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=telescopes
+    volumes:
+      - G:/postgresdata:/var/lib/postgresql/data
+  mybackend:
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./mybackend
+    volumes: 
+      - /opt/app/node_modules
+      - C:/Users/Rafal/Desktop/Docker/webapp/mybackend:/opt/app
+    environment: 
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=telescopes
+      - POSTGRES_USER=docker
+      - REDIS_HOST=myredis
+      - POSTGRES_HOST=mypostgres
+    ports:
+      - "9090:9090"
+
