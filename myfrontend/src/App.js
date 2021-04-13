@@ -4,7 +4,7 @@ import {Switch, Route} from 'react-router-dom';
 import Header from './components/Header/Header';
 import Navigation from './components/Navigation/Navigation';
 import ProductsWrapper from './components/ProductsWrapper/ProductsWrapper';
-import AddProduct from './components/AddProduct/AddProduct';
+import ProductModal from './components/ProductModal/ProductModal';
 import ProductCard from './components/ProductCard/ProductCard';
 
 import classes from './App.module.css';
@@ -85,6 +85,28 @@ function App() {
     });
   }
 
+  const deleteProductInState = (id) => {
+    if (Array.isArray(data)) {
+      setData(data.filter( product => product.id !== +id ));
+    }
+  }
+
+  const editProductInState = ({id, producer, model, price}) => {
+    const editedData = {
+      id,
+      producer,
+      model,
+      price
+    } 
+
+    setData(data.map( product => {
+      if ( product.id === +id) {
+        return editedData;
+      }
+      return product;
+    }))
+  }
+
   useEffect(()=>{
       fetchDatafromDB();
   }, []);
@@ -95,11 +117,11 @@ function App() {
       <Navigation openModalHandler={openModalHandler}/>
 
       <Switch>
-        <Route path='/telescope/:id' component={ProductCard}/>
+        <Route path='/telescope/:id' render={() => <ProductCard deleteProductInState={deleteProductInState} editProductInState={editProductInState}/>}/>
         <Route path='/' exact render={() => <ProductsWrapper data={data}/>}/>
       </Switch>
 
-      <AddProduct 
+      <ProductModal 
         showModal={showModal} 
         modalOFF={closeModalHandler}
         saveSettingsHandler={addNewTelescope}/>

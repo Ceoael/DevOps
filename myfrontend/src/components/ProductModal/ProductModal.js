@@ -1,15 +1,15 @@
 import React from 'react';
 
-import Backdrop from './../Backdrop/Backdrop';
-import Modal from './../Modal/Modal';
-import Input from './../Input/Input';
-import { VALIDATOR_MIN, VALIDATOR_REQUIRE } from './../Input/validators';
+import Backdrop from '../Backdrop/Backdrop';
+import Modal from '../Modal/Modal';
+import Input from '../Input/Input';
+import { VALIDATOR_MIN, VALIDATOR_REQUIRE } from '../Input/validators';
 
-import { useForm } from './../../hooks/form-hooks';
+import { useForm } from '../../hooks/form-hooks';
 
-import classes from './AddProduct.module.css';
+import classes from './ProductModal.module.css';
 
-const AddProduct = ({showModal, modalOFF, saveSettingsHandler}) => {
+const ProductModal = ({showModal, modalOFF, saveSettingsHandler}) => {
     const [formState, inputHandler] = useForm({
         producer: {
             value: 'Sky-Watcher',
@@ -48,7 +48,7 @@ const AddProduct = ({showModal, modalOFF, saveSettingsHandler}) => {
                 modalOFF={modalOFF}> 
                     <form 
                         onSubmit={submitHandler}
-                        className={classes.AddProduct__Form}>
+                        className={classes.ProductModal__Form}>
                         <Input 
                             id="producer"
                             label="Producer:"
@@ -77,7 +77,7 @@ const AddProduct = ({showModal, modalOFF, saveSettingsHandler}) => {
                             initialValue={formState.inputs.price.value}
                             initialValid={formState.inputs.price.isValid}/>
                         <button 
-                            className={classes.AddProduct__okButton}
+                            className={classes.ProductModal__okButton}
                             type="submit" 
                             disabled={!formState.isValid}>OK</button>
                     </form>
@@ -86,4 +86,4 @@ const AddProduct = ({showModal, modalOFF, saveSettingsHandler}) => {
     )
 };
 
-export default AddProduct;
+export default ProductModal;

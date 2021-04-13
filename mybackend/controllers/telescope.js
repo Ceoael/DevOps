@@ -64,3 +64,53 @@ exports.postTelescope = (req, res, next) => {
         });
     })
 };
+
+exports.deleteTelescope = (req, res, next) => {
+    try {
+        const id = parseInt(req.params.id);
+        
+        pgClient.query('DELETE FROM telescopes WHERE id = $1;', [id], (err, result) => {
+            if (err) { 
+                throw err;
+            }
+
+            console.log('DELETE ' + id);
+
+            // REDIS DELETE RECORD
+            redisClient.del(id, function(err, reply) {
+                console.log(reply);
+            })
+            
+            return res.status(200).send({
+                error: false,
+                message: `Deleted product with id: ${id}`
+            })
+        });
+         
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.putTelescope = (req, res, next) => {
+    try {
+        const id = parseInt(req.params.id);
+        const { producer, model, price } = req.body;
+        
+        pgClient.query(`UPDATE telescopes SET producer = '${producer}', model = '${model}', price = ${price} WHERE id = ${id};`, (err, result) => {
+            if (err) { 
+                throw err;
+            }
+
+            // REDIS EDIT RECORD
+            redisClient.setex(id, 600, JSON.stringify([{id: id, ...req.body}]));
+            
+            return res.status(200).send({
+                error: false,
+                message: `Updated product with id: ${id}`
+            })
+        });  
+    } catch (error) {
+        console.log(error);
+    }
+}
