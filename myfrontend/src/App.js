@@ -24,7 +24,7 @@ function App() {
   const addNewTelescope = ({producer, model, price}) => {
     console.log('[AddProduct] Add: ' + producer + ' ' + model + ' , ' + price + ' zł');
     //fetch(' firebase URL ')
-    fetch('http://localhost:9090/telescopes', {
+    fetch('/api/telescopes', {
       method: 'POST',
       headers: {
         'Content-type' : 'application/json'
@@ -74,7 +74,8 @@ function App() {
 
   const fetchDatafromDB = () => {
     console.log('[ProductWrapper] Fetching data...');
-    fetch('http://localhost:9090/telescopes')
+    // fetch('http://mybackend:4000/telescopes')
+    fetch('/api/telescopes')
     .then( response => response.json())
     .then( data => {
         console.log('Success: ', data);
@@ -93,13 +94,13 @@ function App() {
 
   const editProductInState = ({id, producer, model, price}) => {
     const editedData = {
-      id,
+      id: +id,
       producer,
       model,
       price
     } 
 
-    setData(data.map( product => {
+    setData(prevData => prevData.map( product => {
       if ( product.id === +id) {
         return editedData;
       }
@@ -118,7 +119,7 @@ function App() {
 
       <Switch>
         <Route path='/telescope/:id' render={() => <ProductCard deleteProductInState={deleteProductInState} editProductInState={editProductInState}/>}/>
-        <Route path='/' exact render={() => <ProductsWrapper data={data}/>}/>
+        <Route path='/' render={() => <ProductsWrapper data={data}/>}/>
       </Switch>
 
       <ProductModal 

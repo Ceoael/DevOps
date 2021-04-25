@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Product from './Product/Product';
@@ -11,6 +11,11 @@ const ProductsWrapper = (props) => {
     const showDetailsHandler = (id) => {
         history.push(`/telescope/${id}`);
     }
+
+    useEffect(()=>{
+        console.log('Products')
+        console.log(props.data);
+    })
 
     return (
         <div className={classes.ProductWrapper}>

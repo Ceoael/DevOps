@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     res.send("Telescopes server is ready!");
 });
 
-const PORT = 9090;
+const PORT = 4000;
 
 app.listen(PORT, () => {
     console.log(`API listening on port ${PORT}`);

@@ -15,9 +15,10 @@ const ProductCard = ({producer, productName, deleteProductInState, editProductIn
 
     const fetchProduct = () => {
         
-        fetch(`http://localhost:9090/telescopes/${id}`)
+        fetch(`/api/telescopes/${id}`)
         .then( response => response.json())
         .then( data => {
+            console.log(data.data);
             console.log(data.message);
             setProductData(data.data[0]);
         })
@@ -30,7 +31,7 @@ const ProductCard = ({producer, productName, deleteProductInState, editProductIn
     const deleteProductHandler = () => {
         console.log('Delete telescope with id: ' + id);
 
-        fetch(`http://localhost:9090/telescopes/${id}`, {
+        fetch(`/api/telescopes/${id}`, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json'
@@ -66,7 +67,7 @@ const ProductCard = ({producer, productName, deleteProductInState, editProductIn
     }
 
     const editProductHandler = ({producer, model, price}) => {
-        fetch(`http://localhost:9090/telescopes/${id}`, {
+        fetch(`/api/telescopes/${id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
@@ -99,6 +100,7 @@ const ProductCard = ({producer, productName, deleteProductInState, editProductIn
                 showModal={showModal} 
                 modalOFF={turnOffModal}
                 saveSettingsHandler={productDataHandler}/>
+            { productData ? 
             <div className={classes.ProductCard__Wrapper}>
                 <div className={classes.ProductCard}>
                     <div className={classes.ProductCard__Toolbar}>
@@ -112,8 +114,8 @@ const ProductCard = ({producer, productName, deleteProductInState, editProductIn
                         >Delete</Button>
                     </div>
                     <div>
-                        <div className={classes.ProductCard__Producer}>{productData.producer || 'Producer'}</div>
-                        <div className={classes.ProductCard__ProductName}>{productData.model || 'Product Name'}</div>
+                        <div className={classes.ProductCard__Producer}>{productData.producer}</div>
+                        <div className={classes.ProductCard__ProductName}>{productData.model}</div>
                     </div>
 
                     <div>
@@ -130,6 +132,10 @@ const ProductCard = ({producer, productName, deleteProductInState, editProductIn
                     </div>
                 </div>
             </div>
+            : 
+            <div className={classes.ProductCard__NoData}>
+                <p>No data in DB for product with provided id.</p>
+            </div>}
         </Fragment>
     )
 }
