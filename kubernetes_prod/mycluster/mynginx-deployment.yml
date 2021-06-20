@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: my-nginx-container
-          image: ceoael/myfrontendbuild
+          image: ceoael/myfrontendprod
   replicas: 3
   selector:
     matchLabels:
