@@ -1,0 +1,53 @@
+.ProductModal__okButton {
+    height: 40px;
+    padding: 0 30px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 3px 0px 0px black;
+    color: black;
+
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+
+    transition: background-color .3s ease-in-out;
+}
+
+.ProductModal__okButton:hover {
+    background-color: #90ee90;
+}
+
+.ProductModal__okButton:active {
+    box-shadow: none;
+    transform: translateY(3px);
+}
+
+.ProductModal__Form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .ProductModal__okButton {
+        height: 48px;
+        font-size: 1.8rem;
+        padding: 0 50px;
+    }
+}
+
+@media (min-width: 992px) {
+    .ProductModal__okButton {
+        height: 60px;
+        font-size: 2.5rem;
+        padding: 0 50px;
+    }
+}

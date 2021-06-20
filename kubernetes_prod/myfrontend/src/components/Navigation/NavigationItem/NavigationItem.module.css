@@ -1,0 +1,52 @@
+.NavigationItem {
+    display: block;
+    list-style: none;
+    /* background-color: rgb(52,56,64); */
+    background-color: rgba(255, 255, 255, 0.08);
+
+    border-radius: 5px;
+}
+
+.NavigationItem a {
+    display: block;
+    color: #d3d6db;
+    text-decoration: none;
+    width: 100%;
+    padding: 10px 25px;
+    transition: all .3s ease-in-out;
+
+    border-radius: 5px;
+}
+
+.NavigationItem a:hover,
+.NavigationItem a:active,
+.NavigationItem a.active {
+    background-color: #3aad4f;
+    color: white;
+}
+
+.NavigationItem__Button {
+    height: 100%;
+    padding: 0 15px;
+    
+    background-color: #3aad4f;
+    
+    font-size: 1.8rem;
+    font-weight: normal;
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    transition: all .3s ease-in-out;
+}
+
+.NavigationItem__Button:hover,
+.NavigationItem__Button:active,
+.NavigationItem__Button.active {
+    background-color: rgba(79, 235, 107, 1);
+    /* font-weight: bold; */
+    color: black;
+}

@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mybackend-deployment
+  labels:
+    app: my-app
+    component: backend
+
+spec:
+  template:
+    metadata:
+      name: mybackend-pod
+      labels:
+        component: backend
+        app: my-app
+    spec:
+      containers:
+        - name: mybackend-container
+          image: ceoael/mybackend
+          env:
+            - name: PGDATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: mypostgres-config
+                  key: PGDATABASE
+            - name: PGUSER
+              valueFrom:
+                configMapKeyRef:
+                  name: mypostgres-config
+                  key: PGUSER
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mypostgres-secret
+                  key: PGPASSWORD
+            - name: PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mypostgres-config
+                  key: PGHOST
+            - name: REDIS_HOST
+              value: myredis-clusterip
+            - name: REDIS_PORT
+              value: '6379'
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+      component: backend
+              

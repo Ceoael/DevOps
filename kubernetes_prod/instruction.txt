@@ -1,0 +1,54 @@
+//task lab9 : build app based on architecture from the image: Task_image.jpg
+
+//build mybackend if not exists
+// docker build . -t ceoael/mybackend2
+// then push to remote repository: docker push ceoael/mybackend2
+// then create folder myapp_pv in disk g
+
+// Postgres
+kubectl apply -f pv-local.yml
+kubectl apply -f mypostgres-pvc.yml
+
+kubectl apply -f mypostgres-clusterip.yml
+kubectl apply -f mypostgres-secret.yml
+
+kubectl apply -f mypostgres-configMap.yml
+kubectl apply -f mypostgres-deployment.yml
+
+// Redis
+kubectl apply -f myredis-clusterip.yml
+kubectl apply -f myredis-deployment.yml
+
+// Backend
+kubectl apply -f mybackend-clusterip.yml
+kubectl apply -f mybackend-deployment.yml
+kubectl apply -f mybackend-node-port.yml // FOR DEBUGGING
+
+// Frontend - NGINX
+kubectl apply -f mynginx-clusterip.yml
+kubectl apply -f mynginx-deployment.yml
+kubectl apply -f mynginx-node-port.yml // FOR DEBUGGING
+
+// Ingress
+// kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.47.0/deploy/static/provider/cloud/deploy.yaml
+kubectl apply -f myingress.yml
+
+// Check:
+kubectl get deploy
+
+//Clean:
+kubectl delete services --all
+kubectl delete configMaps --all
+kubectl delete deployments --all
+kubectl delete pods --all
+kubectl delete pvc --all
+kubectl delete pv --all
+kubectl delete secret --all
+
+// Check response from server
+// POST: http://localhost:31000/telescopes
+//  body: (x-www-form-urlencoded)
+//      producer: Producer Name
+//      model: Telescope model
+//      price: 0000.00
+// GET: http://localhost:31000/telescopes
