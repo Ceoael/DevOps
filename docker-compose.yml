@@ -10,7 +10,8 @@ services:
       - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=telescopes
     volumes:
-      - G:/postgresdata:/var/lib/postgresql/data
+      - ./postgresdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
   mybackend:
     restart: always
     build: 
@@ -18,7 +19,7 @@ services:
       context: ./mybackend
     volumes: 
       - /opt/app/node_modules
-      - C:/Users/Rafal/Desktop/Docker/webapp/mybackend:/opt/app
+      - ./mybackend:/opt/app
     environment: 
       - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=telescopes
@@ -34,6 +35,9 @@ services:
       context: ./mynginx
     ports:
       - "9090:80"
+    depends_on:
+      - mybackend
+      - myfrontend
   myfrontend:
     build:
       dockerfile: Dockerfile.dev
@@ -42,5 +46,5 @@ services:
       CHOKIDAR_USEPOLLING: "true"
     volumes: 
       - /opt/app/node_modules
-      - C:/Users/Rafal/Desktop/Docker/webapp/myfrontend:/opt/app
+      - ./myfrontend:/opt/app
 

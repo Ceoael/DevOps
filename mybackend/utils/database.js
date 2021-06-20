@@ -13,7 +13,12 @@ pgClient.on('error', () => {
 });
 
 pgClient
-.query('CREATE TABLE IF NOT EXISTS telescopes (id SERIAL PRIMARY KEY, producer varchar(255), model varchar(255), price DECIMAL(10, 2));')
+.query('CREATE TABLE IF NOT EXISTS "telescopes" ("id" SERIAL PRIMARY KEY, "producer" varchar(255), "model" varchar(255), "price" DECIMAL(10, 2));')
+.then( result => {
+    if (result) {
+        console.log('Table created');
+    }
+})
 .catch((err) => {
     console.log(err)
 })
