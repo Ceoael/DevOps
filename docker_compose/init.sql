@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS "telescopes" ("id" SERIAL PRIMARY KEY, "producer" varchar(255), "model" varchar(255), "price" DECIMAL(10, 2), "type" varchar(255), "type_of_build" varchar(255), "weight" DECIMAL(10, 2), "focal_length" DECIMAL(10, 2), "aperture" DECIMAL(10, 2), "aperture_ratio" DECIMAL(10, 2));

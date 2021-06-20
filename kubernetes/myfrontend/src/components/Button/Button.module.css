@@ -1,0 +1,37 @@
+.Button {
+    height: 100%;
+    padding: 5px 15px;
+    
+    background: #00f593;
+    
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    transition: all .3s ease-in-out;
+}
+
+.Button--violet {
+    background: #9147FF;
+}
+
+.Button--red {
+    background: #e91916;
+}
+
+.Button--blue {
+    background: #00b8ff;
+}
+
+.Button:hover,
+.Button:active,
+.Button.active {
+    /* background-color: rgba(79, 235, 107, 1); */
+    /* font-weight: bold; */
+    color: black;
+}

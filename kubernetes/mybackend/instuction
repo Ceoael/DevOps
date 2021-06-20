@@ -1,0 +1,12 @@
+docker network create telescopes
+
+docker run --name=myredis --network=telescopes --rm redis:alpine
+
+docker run -v [path] --rm --name=telescopesdb --network=telescopes -e POSTGRES_PASSWORD=[password] postgres:alpine
+docker exec -it [hash] sh
+su - postgres
+CREATE DATABASE [name];
+
+
+docker build . -t ceoael/mybackend
+docker run --rm -p 9090:9090 --network=telescopes ceoael/mybackend

@@ -1,1 +1,0 @@
-CREATE TABLE IF NOT EXISTS "telescopes" ("id" SERIAL PRIMARY KEY, "producer" varchar(255), "model" varchar(255), "price" DECIMAL(10, 2));

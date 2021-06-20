@@ -1,0 +1,47 @@
+.Product {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    /* max-width: 800px; */
+
+    width: 100%;
+     
+
+    padding: 10px 10px;
+    margin:  20px 0;
+
+    border-top: 1px solid rgba(255,255,255, .3);
+}
+
+.Product__Info {
+    flex-grow: 1;
+    padding-right: 20px;
+
+    cursor: pointer;
+}
+
+.Product__ProducerName {
+    font-size: .9rem;
+    font-weight: lighter;
+    color: rgba(255, 255, 255, .5);
+}
+
+.Product__ProductName {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.Product__Price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Product__BasePrice {
+    text-align: center;
+    color: #119c5f;
+
+    font-size: 1.6rem;
+    font-weight: bold;
+}

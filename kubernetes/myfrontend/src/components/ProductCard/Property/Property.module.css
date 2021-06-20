@@ -1,0 +1,21 @@
+.Property {
+    display: flex;
+    /* background: red; */
+    padding: 10px 0;
+
+    border-bottom: 1px solid white;
+}
+
+.Property__Value {
+    padding: 0 20px;
+    font-size: 1.1rem;
+    width: 50%;
+}
+
+.Property__Value--verticalLine {
+    border-right: 1px solid white;
+}
+
+.Property__Value--bold {
+    font-weight: bolder;
+}
